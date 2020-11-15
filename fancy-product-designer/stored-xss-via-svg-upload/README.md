@@ -15,11 +15,11 @@ This vulnerability can result in the takeover of any user's account on the affec
 SVGs accessed in this way can trivially read out current `_wpnonce` values, giving an attacker unfettered access to the entire WordPress API of an affected site.
 
 ### Proof of Concept
- - Account takover SVG: [change-user-email.svg](https://github.com/jdgregson/Disclosures/blob/master/fancy-product-designer/stored-xss-via-svg-upload/change-user-email.svg)
+ - Account takeover SVG: [change-user-email.svg](https://github.com/jdgregson/Disclosures/blob/master/fancy-product-designer/stored-xss-via-svg-upload/change-user-email.svg)
  - Demo video: [stored-xss-account-takover.mp4](https://raw.githubusercontent.com/jdgregson/Disclosures/master/fancy-product-designer/stored-xss-via-svg-upload/stored-xss-account-takover.mp4)
 
 ### Disclosure Timeline
- - 10/10/2020: issue reported via ticket on developer's support form
+ - 10/10/2020: issue reported via ticket on developer's support forum
  - 10/11/2020: developer responded discussing potential mitigations
  - 10/20/2020: developer released an update which did not address the issue
  - 10/26/2020: developer released an update which addressed the issue by only allowing a subset of tags and attributes in uploaded SVGs

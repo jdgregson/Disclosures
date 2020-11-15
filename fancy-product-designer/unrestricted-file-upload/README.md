@@ -35,7 +35,7 @@ The fact that the uploaded file will have one of the previously mentioned extens
  - Demo video: [unrestricted-file-upload.mp4](https://raw.githubusercontent.com/jdgregson/Disclosures/master/fancy-product-designer/unrestricted-file-upload/unrestricted-file-upload.mp4)
 
 ### Disclosure Timeline
- - 10/11/2020: issue reported via ticket on developer's support form
+ - 10/11/2020: issue reported via ticket on developer's support forum
  - 10/11/2020: ticket closed by developer with no response
  - 10/20/2020: developer released an update which did not address the issue
  - 10/26/2020: developer released an update which did not address the issue
