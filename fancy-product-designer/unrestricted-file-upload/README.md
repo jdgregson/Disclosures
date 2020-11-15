@@ -2,7 +2,7 @@
 Fancy Product Designer for WooCommerce is a WordPress plugin which allows users to design custom products in a vendor's WooCommerce store. It is sold through the third-party marketplace "Envato Market" and boasts over 15,000 sales.
 
 ## Unrestricted File Upload
-Fancy Product Designer for WooCommerce before version 4.5.1 contains an Unrestricted File Upload vulnerability.
+Fancy Product Designer for WooCommerce before and including version 4.5.1 contains an Unrestricted File Upload vulnerability.
 
 An unauthenticated attacker is able to upload any type of file to an affected WooCommerce store by exploiting a Time of Check, Time of Use (TOCTOU) weakness in custom-image-handler.php's `url` parameter. However, the file will be saved with one of the following extensions on the server: jpeg, png, or svg.
 
