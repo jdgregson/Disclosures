@@ -31,8 +31,8 @@ The fact that the uploaded file will have one of the previously mentioned extens
  - Malware distribution by uploading malicious binaries and other payloads
 
 ### Proof of Concept
- - Exploit code: [poc.php](https://github.com/jdgregson/disclosures/fancy-product-designer/unrestricted-file-upload/poc.php)
- - Demo video: [unrestricted-file-upload.mp4](https://github.com/jdgregson/disclosures/fancy-product-designer/unrestricted-file-upload/unrestricted-file-upload.mp4)
+ - Exploit code: [poc.php](https://github.com/jdgregson/Disclosures/blob/master/fancy-product-designer/unrestricted-file-upload/poc.php)
+ - Demo video: [unrestricted-file-upload.mp4](https://raw.githubusercontent.com/jdgregson/Disclosures/master/fancy-product-designer/unrestricted-file-upload/unrestricted-file-upload.mp4)
 
 ### Disclosure Timeline
  - 10/11/2020: issue reported via ticket on developer's support form
