@@ -1,12 +1,12 @@
 # Xfinity Gateway XB3 - Authenticated Reflected XSS
-The administrative interface of Xfinity Gateway model XB3 (and possibly others) will execute arbitrary JavaScript if sent a specially crafted POST request by an a logged in administrator.
+The administrative interface of Xfinity Gateway model XB3 (and possibly others) will execute arbitrary JavaScript if sent a specially crafted POST request by a logged in administrator.
 
 ## Details
 The `/wizard_step2.php` page takes a POST parameter `userPassword` and unsafely echoes it to JavaScript on the page:
 
     var newPassword = '<?php if("admin" == $_SESSION["loginuser"]) echo $_POST["userPassword"]; ?>';
 
-Arbitrary JavaScript can be executed if the following payload is sent in the `userPassword` POST parameter:
+Arbitrary JavaScript can be executed if the following payload is sent to the page in the `userPassword` POST parameter:
 
     ';}alert(1);function foo() {var foo = '
 
