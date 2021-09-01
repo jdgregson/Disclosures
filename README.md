@@ -7,4 +7,5 @@ Reward your researchers.
 
 ## Contents
 ### [Fancy Product Designer](./fancy-product-designer/)
+### [Microsoft](./microsoft/)
 ### [Xfinity](./xfinity/)
