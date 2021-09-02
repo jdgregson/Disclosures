@@ -21,6 +21,12 @@ JavaScript executed in WDAG is able to redirect to a similar URL and cause WDAG 
 
 You can find a Proof-of-Concept [here](https://research.jdgregson.com/poc/wdag/dos1/).
 
+
+
+https://user-images.githubusercontent.com/3778841/131773450-4ec60cad-a5f5-4fba-8bcc-3f22360b9a85.mp4
+
+
+
 ## Impact
 
 The impact of this vulnerability is Denial-of-Service. A malicious website is able to close WDAG at will, which can be used to prevent users from loading certain pages in WDAG. This may cause the user to load the page outside of WDAG on the host operating system.
