@@ -23,7 +23,7 @@ You can find a Proof-of-Concept [here](https://research.jdgregson.com/poc/wdag/d
 
 
 
-https://user-images.githubusercontent.com/3778841/131773450-4ec60cad-a5f5-4fba-8bcc-3f22360b9a85.mp4
+https://user-images.githubusercontent.com/3778841/131776097-52b29084-7ee0-42d3-b79a-be72ee8e3752.mp4
 
 
 
